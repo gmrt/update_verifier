@@ -1,0 +1,3 @@
+*.o
+boringssl-build/
+verifier
