@@ -474,7 +474,7 @@ std::unique_ptr<EC_KEY, ECKEYDeleter> parse_ec_key(FILE* file) {
 // Otherwise returns false if the file failed to parse, or if it contains zero
 // keys. The contents in certs would be unspecified on failure.
 bool load_keys(const char* filename, std::vector<Certificate>& certs) {
-  std::unique_ptr<FILE, decltype(&fclose)> f(fopen(filename, "re"), fclose);
+  std::unique_ptr<FILE, decltype(&fclose)> f(fopen(filename, "r"), fclose);
   if (!f) {
     PLOG(ERROR) << "error opening " << filename;
     return false;
