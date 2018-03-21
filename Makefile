@@ -15,7 +15,7 @@ $(TARGET): $(LIBCRYPTO) $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBCRYPTO)
 
 $(LIBCRYPTO):
-	mkdir -p $(LIBCRYPTO_PATH) && cd $(LIBCRYPTO_PATH) && cmake ../boringssl && $(MAKE)
+	mkdir -p $(LIBCRYPTO_PATH) && cd $(LIBCRYPTO_PATH) && cmake -DCMAKE_BUILD_TYPE=Release ../boringssl && $(MAKE)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
