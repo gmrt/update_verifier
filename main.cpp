@@ -57,15 +57,15 @@ int main(int argc, char *argv[]) {
         return VERIFY_FAILURE;
     }
 #else
-    OFSTRUCT lpReOpenBuff;
-    HANDLE hFile = (HANDLE)OpenFile(filePath, &lpReOpenBuff, OF_READ);
-    if (hFile == NULL) {
+    HANDLE hFile = CreateFile(filePath, GENERIC_READ, 0,
+                              NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (hFile == INVALID_HANDLE_VALUE) {
         std::cerr << "Failed to open file" << std::endl;
         CloseHandle(hFile);
         return VERIFY_FAILURE;
     }
     HANDLE hMap = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0, 0, NULL);
-    if (hFile == NULL) {
+    if (hMap == INVALID_HANDLE_VALUE) {
         std::cerr << "Failed to create file mapping" << std::endl;
         CloseHandle(hFile);
         return VERIFY_FAILURE;
